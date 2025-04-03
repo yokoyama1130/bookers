@@ -1,19 +1,28 @@
-<h2>Books</h2>
 
-<% @books.each do |book| %>
+<body>
+<h1>Books</h1>
 
-  <p>Title</p>
-  <p>Body</p>
-  <span><%= book.title %></span>
-  <span><%= book.body %></span>
-  <span>
-    <%= link_to "Show", book_path(book.id) %>
-    <!-- なんかこの下は@無くすと画面遷移されるようになる -->
-    <%= link_to "Edit", edit_book_path(book.id) %>
-    <%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  </span>
-  
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+    </tr>
+  </thead>
+  <% @books.each do |book| %>
+  <tbody>
+    <tr>
+      <td><%= book.title %></td>
+      <td><%= book.body %></td>
+      <td><%= link_to "Show", book_path(book.id) %></td>
+      <!-- なんかこの下は@無くすと画面遷移されるようになる -->
+      <td><%= link_to "Edit", edit_book_path(book.id) %></td>
+      <td><%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+    </tr>
+  </tbody>
 <% end %>
+</table>
 
 <h2>New book</h2>
 
@@ -28,11 +37,15 @@
 
 <!-- form_with部分 -->
 <%= form_with model: @book do |f| %>
-  <h4>title</h4>
-  <%= f.text_field :title %>
-	
-  <h4>Body</h4>
-  <%= f.text_area :body %><br>
-	
-  <%= f.submit 'Create Book' %>
+  <div class="field">
+    <h4>Title</h4>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <h4>Body</h4>
+    <%= f.text_area :body %><br>
+  </div>
+    <%= f.submit 'Create Book' %>
 <% end %>
+
+</body>
